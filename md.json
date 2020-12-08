@@ -1,0 +1,73 @@
+{
+  
+  "users": [
+    {
+        "id": 1,
+        "prenom": "zeumb",
+        "nom": "zeumb",
+        "email": "admin@test.com",
+        "password": "passer",
+        "profil": {
+            "id": 1,
+            "libelle": "ADMIN"
+        }
+    },
+
+    {
+        "id": 2,
+        "prenom": "zeumb",
+        "nom": "zeumb",
+        "email": "formateur@test.com",
+        "password": "passer",
+        "profil": {
+            "id": 2,
+            "libelle": "FORMATEUR"
+        }
+    },
+
+    {
+        "id": 3,
+        "prenom": "zeumb",
+        "nom": "zeumb",
+        "email": "cm@test.com",
+        "password": "passer",
+        "profil": {
+            "id": 3,
+            "libelle": "CM"
+        }
+    },
+
+    {
+        "id": 4,
+        "prenom": "zeumb",
+        "nom": "zeumb",
+        "email": "apprenant@test.com",
+        "password": "passer",
+        "profil": {
+            "id": 3,
+            "libelle": "APPRENANT"
+        }
+    }
+ ],
+ 
+ "profil":[
+   {
+     "id":1,
+     "libelle": "ADMIN"
+   },
+   { 
+     "id":2,
+     "libelle": "FORMATEUR"
+   },
+   {
+     "id":3,
+     "libelle": "CM"
+   },
+   {
+     "id":4,
+     "libelle": "APPRENANT"
+   }
+ ]
+
+
+}
