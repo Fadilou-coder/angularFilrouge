@@ -1,17 +1,31 @@
-<h2>Login</h2>
-<form>
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" formControlName="email" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" formControlName="password" class="form-control"/>
-    </div>
-    <div class="form-group">
-        <button class="btn btn-primary">
-            Login
-        </button>
-        <a class="btn btn-link">Register</a>
-    </div>
-</form>
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Log in</mat-card-title>
+    </mat-card-header>
+
+    <form [formGroup]="formLogin" (ngSubmit)="DoLogin()">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput  [(ngModel)]="email" formControlName="email" type="text" id="email" name="email"
+          placeholder="Email" [ngClass]="{'is-invalid': submitted && f.email.errors }">
+        </mat-form-field>
+        <div class="text-danger" *ngIf="submitted && f?.email?.errors">
+          <div *ngIf="f?.email?.errors?.required">email is required</div>
+          <div *ngIf="f?.email?.errors?.email">email n'est pas valide</div>
+        </div>
+        <mat-form-field class="example-full-width">
+          <input matInput [(ngModel)]="password" formControlName="password" type="password" id="password"
+          name="password" placeholder="Password">
+        </mat-form-field>
+        <div class="text-danger" *ngIf="submitted && f?.password?.errors">
+          <div *ngIf="f?.password?.errors?.required">password is required</div>
+          <div *ngIf="f?.password?.errors?.minlength">password n'est pas valide</div>
+        </div>
+      </mat-card-content>
+      <button mat-stroked-button color="accent" class="btn-block">Log in</button>
+    </form>
+  </mat-card>
+
+</div>
