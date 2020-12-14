@@ -130,5 +130,8 @@
       }
     }
   },
-  "defaultProject": "ProjetFilRouge"
+  "defaultProject": "ProjetFilRouge",
+  "cli": {
+    "analytics": "1f48caf7-82a4-4e2b-ad05-3686684dd8bc"
+  }
 }

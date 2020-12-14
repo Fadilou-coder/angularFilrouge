@@ -1,0 +1,57 @@
+
+ul li {
+  list-style: none;
+  line-height: 40px;
+}
+.navbar{
+  justify-content: space-between;
+  background-color: #328b8a;
+  color: #fff;
+}
+span{
+  padding-right: 1rem;
+}
+.navbar .mat-button{
+  bottom: 2px;
+}
+
+.navbar .mat-button:focus{
+ border: none;
+  outline: none;
+}
+
+button.mat-menu-item {
+  width: 100%;
+  background-color: white;
+  color: black;
+}
+button.mat-menu-item:focus {
+  border: none;
+  outline: none;
+}
+button.mat-menu-item:hover{
+  background-color: #328b8a;
+  color: white;
+}
+
+mat-sidenav-container{
+  height: 100%;
+}
+mat-sidenav, mat-sidenav-content{
+  padding: 15px;
+color: #303330;
+}
+
+mat-divider{
+  background-color: white;
+  opacity: 0.5;
+}
+
+mat-accordion, mat-panel-title{
+  font-size: 20px;
+}
+
+
+.comp{
+  background-image: url("/assets/images/contact.jpg");
+}

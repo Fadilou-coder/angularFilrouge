@@ -25,6 +25,7 @@ export class ConnexionService {
     return this.http.post(this.apiUrl + '/users', {email, password});
   }*/
 
+  // tslint:disable-next-line: typedef
   authenticate(email: string, password: string){
     return this.http.post(this.baseUrl + '/login', {
       email, password

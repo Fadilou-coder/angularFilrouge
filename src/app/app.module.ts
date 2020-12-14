@@ -5,19 +5,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { LoginInterceptorProvider } from 'src/app/Interceptor/login.interceptor';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
 import { HomeComponent } from 'src/app/home/home.component';
 import { LoginComponent } from 'src/app/login/login.component';
 import { RegisterComponent } from 'src/app/register/register.component';
+import { usersComponent } from 'src/app/users/users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    usersComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,7 @@ import { RegisterComponent } from 'src/app/register/register.component';
     BrowserAnimationsModule,
     FlexLayoutModule
   ],
-  providers: [],
+  providers: [LoginInterceptorProvider],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

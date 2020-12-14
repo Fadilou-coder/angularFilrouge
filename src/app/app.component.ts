@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ProjetFilRouge';
+  panelOpenState = false;
+  token = localStorage.getItem('token');
 }

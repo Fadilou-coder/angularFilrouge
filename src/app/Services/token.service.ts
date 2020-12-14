@@ -11,18 +11,13 @@ export class TokenService {
 
   constructor() { }
   public setLocalStorageToken(auth: TokenClass): void{
-    localStorage.setItem('Authorization', JSON.stringify(auth));
+    localStorage.setItem('token', JSON.stringify(auth));
   }
   public getLocalStorageToken(): TokenClass{
-    const tokenData = JSON.parse(localStorage.getItem('Authorization') as string);
+    const tokenData = JSON.parse(localStorage.getItem('token') as string);
     return tokenData == null ? null : tokenData;
   }
   public removeLocalStorage(): void{
-    localStorage.removeItem('Authorization');
-    localStorage.removeItem('usernom');
-    localStorage.removeItem('userprenom');
-    localStorage.removeItem('useremail');
-
-
+    localStorage.removeItem('token');
   }
 }
