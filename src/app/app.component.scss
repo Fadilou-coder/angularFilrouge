@@ -7,6 +7,7 @@ ul li {
   justify-content: space-between;
   background-color: #328b8a;
   color: #fff;
+  height: 10vh;
 }
 span{
   padding-right: 1rem;
@@ -38,8 +39,7 @@ mat-sidenav-container{
   height: 100%;
 }
 mat-sidenav, mat-sidenav-content{
-  padding: 15px;
-color: #303330;
+  color: #303330;
 }
 
 mat-divider{
@@ -49,9 +49,4 @@ mat-divider{
 
 mat-accordion, mat-panel-title{
   font-size: 20px;
-}
-
-
-.comp{
-  background-image: url("/assets/images/contact.jpg");
 }

@@ -1,0 +1,28 @@
+.addUser {
+  font-size: 50px;
+  margin-right: 10px;
+  color: #328b8a;
+}
+table {
+  width: 100%;
+  background-color: white;
+}
+
+
+td,th {
+  width: 5%;
+  border-color: #328b8a;
+  color: black;
+}
+table th{
+  font-size: 20px;
+}
+
+.title{
+  color: #328b8a;
+  text-shadow:  #328b8a 0px 5px 10px;
+}
+
+.action_btn:hover {
+  color: #eb7e28;
+}

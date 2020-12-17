@@ -1,0 +1,77 @@
+<div class="card-body">
+  <h3 class="card-header title text-center font-weight-bold text-uppercase py-4">Ajouter Users</h3>
+</div>
+
+<form [formGroup]="formadd" class="md-form">
+  <div class="container">
+    <br><br>
+    <mat-form-field appearance="fill" class = "w-100">
+      <mat-label>Prenom</mat-label>
+      <input matInput [(ngModel)]="prenom" formControlName="prenom" type="text" id="prenom" name="prenom"
+      [ngClass]="{'is-invalid': f.prenom.errors }">
+      <mat-error *ngIf="f?.prenom?.errors?.required">le prenom est requis</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class = "form">
+      <mat-label>Nom</mat-label>
+      <input matInput [(ngModel)]="nom" formControlName="nom" type="text" id="nom" name="nom"
+      [ngClass]="{'is-invalid': f.nom.errors }">
+      <mat-error *ngIf="f?.nom?.errors?.required">le nom est requis</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" class = "w-100">
+      <mat-label>Enter your email</mat-label>
+      <input matInput [(ngModel)]="email" formControlName="email" type="text" id="email" name="email"
+      placeholder="Email" [ngClass]="{'is-invalid': f.email.errors }">
+      <mat-error *ngIf="f?.email?.errors?.required">l'email est requis</mat-error>
+      <mat-error *ngIf="f?.email?.errors?.email">l'email n'est pas valide</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" class = "w-100">
+      <mat-label>Password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password" formControlName="password" type="passsord" id="password" name="password"
+      [ngClass]="{'is-invalid': f.password.errors }">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="f?.password?.errors?.required">le password est requis</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class = "form">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput [type]="hide ? 'confirm' : 'text'" [(ngModel)]="confirm" formControlName="confirm" type="password" id="confirm" name="confirm"
+      [ngClass]="{'is-invalid': f.confirm.errors }">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide confirm'" [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="password == confirm">Password do not match</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class = "w-100">
+      <mat-label>Profil</mat-label>
+      <mat-select [(ngModel)]="profils" formControlName="profils" type="text" id="profils" name="profils">
+        <mat-option value="APPRENANT">APPRENANT</mat-option>
+        <mat-option value="FORMATEUR">FORMATEUR</mat-option>
+        <mat-option value="ADMIN">ADMIN</mat-option>
+        <mat-option value="CM">CM</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <div class="file-field" >
+      <!--
+        <div class="z-depth-1-half mb-4" *ngIf= "image">
+        <img src={{image}} class="img-fluid"
+          alt="example placeholder">
+      </div> -->
+      <div class="d-flex justify-content-center">
+        <div class="btn btn-mdb-color btn-rounded float-left">
+          <span>Choose file</span>
+          <input type="file" [(ngModel)]="image" formControlName="image" id="image" name="image" (change)="onFilSelected($event)">
+        </div>
+      </div>
+    </div>
+    <div *ngIf = "!edit">
+      <button [disabled]="formadd.invalid" mat-stroked-button color="accent" class="btn btn-succes" (click)="addUser()" class="btn btn-block">AJOUTER</button>
+    </div>
+    <div *ngIf = "edit">
+      <button [disabled]="formadd.invalid" mat-stroked-button color="accent" class="btn btn-succes" (click) = "updateUser()" class="btn btn-block">MODIFIER</button>
+    </div>
+  </div>
+</form>

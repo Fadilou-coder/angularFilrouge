@@ -32,7 +32,7 @@
           <div *ngIf="f?.password?.errors?.minlength">password n'est pas valide</div>
         </div>
       </mat-card-content>
-      <button mat-stroked-button color="accent" class="btn-block">Log in</button>
+      <button [disabled]="formLogin.invalid" mat-stroked-button color="accent" class="btn-block">Log in</button>
     </form>
   </mat-card>
 

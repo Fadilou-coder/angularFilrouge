@@ -1,16 +1,21 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
+import { TokenService } from 'src/app/Services/token.service';
 
-
+@Injectable({
+  providedIn: 'root'
+})
 export class LoginInterceptor implements HttpInterceptor{
+  constructor(public tokenService: TokenService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log(req);
-    const token = localStorage.getItem('token');
-    if(token) {
+    const token = this.tokenService.getLocalStorageToken();
+    if ( token ) {
       const cloneReq = req.clone(
         {
-          params: new HttpParams().set('access_token', token)
+          headers: req.headers.set('Authorization', `Bearer ${token.token}`)
+        .set('Accept', 'application/json')
         }
       );
       return next.handle(cloneReq);
@@ -18,10 +23,4 @@ export class LoginInterceptor implements HttpInterceptor{
       return next.handle(req);
     }
   }
-}
-
-export const LoginInterceptorProvider = {
-  provide: HTTP_INTERCEPTORS,
-  useClass: LoginInterceptor,
-  multi: true
 }
