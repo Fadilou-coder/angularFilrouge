@@ -6,23 +6,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl = '/api';
-  static idUser: number ;
 
 
   constructor(
     private http: HttpClient,
     private formBuilder: FormBuilder,
     ) { }
+  static idCourent: number;
+  private baseUrl = '/api';
 
 
-  findAllUser(){
-
+  findAllUser(page: any){
     return this.http.get(this.baseUrl + '/admin/users');
   }
 
-  findAllProfil(){
-    return this.http.get(this.baseUrl + '/admin/profils');
+  findAllProfil(page: any){
+    return this.http.get(this.baseUrl + '/admin/profils?page=' + page);
   }
 
   addprofil(data: any){
@@ -47,6 +46,10 @@ export class UserService {
     return this.http.get(this.baseUrl + '/admin/users/' + data);
   }
 
+  getUserByProfil(data: any){
+    return this.http.get(this.baseUrl + '/admin/profils/' + data + '/users');
+  }
+
   putProfil(id: any, body: any){
     return this.http.put(this.baseUrl + '/admin/profils/' + id, body);
   }
@@ -56,7 +59,7 @@ export class UserService {
   }
 
   getID(id: any){
-    UserService.idUser = id;
+    UserService.idCourent = id;
   }
 
 }

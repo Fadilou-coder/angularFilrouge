@@ -1,4 +1,4 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpParams, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ export class LoginInterceptor implements HttpInterceptor{
       const cloneReq = req.clone(
         {
           headers: req.headers.set('Authorization', `Bearer ${token.token}`)
-        .set('Accept', 'application/json')
+          .set('Accept', 'application/json')
         }
       );
       return next.handle(cloneReq);

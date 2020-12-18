@@ -1,52 +1,84 @@
 
-ul li {
-  list-style: none;
-  line-height: 40px;
-}
-.navbar{
-  justify-content: space-between;
-  background-color: #328b8a;
-  color: #fff;
-  height: 10vh;
-}
-span{
-  padding-right: 1rem;
-}
-.navbar .mat-button{
-  bottom: 2px;
+// ul li {
+//   list-style: none;
+//   line-height: 40px;
+// }
+// .navbar{
+//   justify-content: space-between;
+//   background-color: #8a0e0e;
+//   color: #fff;
+//   height: 10vh;
+// }
+// span{
+//   padding-right: 1rem;
+// }
+// .navbar .mat-button{
+//   bottom: 2px;
+// }
+
+// .navbar .mat-button:focus{
+//  border: none;
+//   outline: none;
+// }
+
+// button.mat-menu-item {
+//   width: 100%;
+//   background-color: white;
+//   color: black;
+// }
+// button.mat-menu-item:focus {
+//   border: none;
+//   outline: none;
+// }
+// button.mat-menu-item:hover{
+//   background-color: #8a0e0e;
+//   color: white;
+// }
+
+// mat-sidenav-container{
+//   height: 100%;
+// }
+// mat-sidenav, mat-sidenav-content{
+//   color: #303330;
+// }
+
+// mat-divider{
+//   background-color: white;
+//   opacity: 0.5;
+// }
+
+// mat-accordion, mat-panel-title{
+//   font-size: 20px;
+// }
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-.navbar .mat-button:focus{
- border: none;
-  outline: none;
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
 }
 
-button.mat-menu-item {
-  width: 100%;
-  background-color: white;
-  color: black;
-}
-button.mat-menu-item:focus {
-  border: none;
-  outline: none;
-}
-button.mat-menu-item:hover{
-  background-color: #328b8a;
-  color: white;
+h1.example-app-name {
+  margin-left: 8px;
 }
 
-mat-sidenav-container{
-  height: 100%;
-}
-mat-sidenav, mat-sidenav-content{
-  color: #303330;
-}
-
-mat-divider{
-  background-color: white;
-  opacity: 0.5;
+.example-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
 }
 
-mat-accordion, mat-panel-title{
-  font-size: 20px;
+.example-is-mobile .example-sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+     `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
 }

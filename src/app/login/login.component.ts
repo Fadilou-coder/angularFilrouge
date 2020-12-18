@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import jwt_decode from 'jwt-decode';
 import { TokenClass } from 'src/app/Model/token/token-class';
 import { ConnexionService } from 'src/app/Services/connexion.service';
 import { TokenService } from 'src/app/Services/token.service';
@@ -48,10 +47,8 @@ export class LoginComponent implements OnInit {
       this.token = (data as TokenClass);
       this.tokenService.setLocalStorageToken(this.token);
       const token = this.tokenService.getLocalStorageToken();
-      const decoded = jwt_decode(token.token);
-      console.log(decoded);
       console.log(this.tokenService.getLocalStorageToken());
-      this.router.navigate(['/home']);
+      this.router.navigate(['/users']);
    }, (err: any) => console.log(err));
   }
 

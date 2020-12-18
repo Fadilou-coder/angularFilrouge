@@ -11,23 +11,26 @@ import { AddUsersComponent } from 'src/app/add-users/add-users.component';
 import { AngularMaterialModule } from 'src/app/angular-material.module';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
-import { HomeComponent } from 'src/app/home/home.component';
+import { LoginGuard } from 'src/app/guard/login.guard';
+import { LogoutGuard } from 'src/app/guard/logout.guard';
 import { ListProfilsComponent } from 'src/app/list-profils/list-profils.component';
 import { LoginComponent } from 'src/app/login/login.component';
 import { usersComponent } from 'src/app/users/users.component';
+import { UserbyprofilComponent } from './userbyprofil/userbyprofil.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
     usersComponent,
     AddUsersComponent,
     ListProfilsComponent,
     AddProfilsComponent,
-    usersComponent
+    usersComponent,
+    UserbyprofilComponent
   ],
   imports: [
+
 
   BrowserModule,
     AppRoutingModule,
@@ -44,7 +47,9 @@ import { usersComponent } from 'src/app/users/users.component';
       provide: HTTP_INTERCEPTORS,
       useClass: LoginInterceptor,
       multi: true
-    }
+    },
+    LoginGuard,
+    LogoutGuard
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

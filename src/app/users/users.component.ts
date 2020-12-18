@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {DomSanitizer} from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import {UserService} from 'src/app/Services/user.service';
 import { AddUsersComponent } from 'src/app/add-users/add-users.component';
+import { UserbyprofilComponent } from 'src/app/userbyprofil/userbyprofil.component';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  styleUrls: ['./users.component.scss']
 })
 // tslint:disable-next-line: class-name
 export class usersComponent implements OnInit {
@@ -26,12 +27,7 @@ export class usersComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.id = this.url.snapshot.params['id'];
-    if (this.id){
-      this.userservice.getOneUser(this.id);
-      console.log(this.id);
-    }
-    this.userservice.findAllUser().subscribe(
+    this.userservice.findAllUser(1).subscribe(
       (response: any) => {
         this.users = response;
         }
@@ -44,6 +40,7 @@ export class usersComponent implements OnInit {
       this.userservice.archiverUser(id).subscribe(
         (response: any) => {
           console.log(response);
+          window.location.reload();
         },
         error => {
           console.log(error);
@@ -53,6 +50,7 @@ export class usersComponent implements OnInit {
   }
 
   onCreate(){
+    UserService.idCourent = 0;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -60,13 +58,13 @@ export class usersComponent implements OnInit {
   }
 
   onEdit(id: any){
-    this.router.navigate(['/users/' + id]);
     this.userservice.getID(id);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     this.dialog.open(AddUsersComponent);
   }
+
 
 
 }

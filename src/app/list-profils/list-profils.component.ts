@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { UserService } from 'src/app/Services/user.service';
+import { AddProfilsComponent } from 'src/app/add-profils/add-profils.component';
+import { UserbyprofilComponent } from 'src/app/userbyprofil/userbyprofil.component';
 
 @Component({
   selector: 'app-list-profils',
@@ -9,26 +12,33 @@ import { UserService } from 'src/app/Services/user.service';
   styleUrls: ['./list-profils.component.scss']
 })
 export class ListProfilsComponent implements OnInit {
-
-  profils:any;
-  displayedColumns: string[] = ['libelle', 'update', 'delete'];
-  id: any;
   constructor(
     private userservice: UserService,
     private url: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
     ) { }
+  page = this.url.snapshot.params['id'];
+
+  profils: any;
+  displayedColumns: string[] = ['libelle', 'update', 'delete', 'details'];
+  id: any;
 
   ngOnInit(): void {
-    this.id = this.url.snapshot.params['id'];
-    this.userservice.getOneProfil(this.id);
-    this.userservice.findAllProfil().subscribe(
+    this.id = UserService.idCourent;
+    console.log(this.page);
+    if (!this.page){
+      this.page = 1;
+    }
+    this.userservice.findAllProfil(this.page).subscribe(
       (response: any) => {
         this.profils = response;
         console.log(this.profils);
         }
       ,
-      (error: any) => {console.log(error)}
+      (error: any) => {
+        console.log(error);
+      }
     );
   }
 
@@ -46,7 +56,38 @@ export class ListProfilsComponent implements OnInit {
   }
 
   editProfil(id: any){
-    this.router.navigate(['/profils/' + id]);
+    this.userservice.getID(id);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(AddProfilsComponent);
+  }
+
+  onCreate(){
+    UserService.idCourent = 0;
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(AddProfilsComponent);
+  }
+
+
+  details(id: any){
+    this.userservice.getID(id);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    this.dialog.open(UserbyprofilComponent, { width: '100%' });
+  }
+
+  suivant(){
+    this.page++;
+    this.router.navigate(['/profils/' + this.page]);
+  }
+
+  precedent(){
+    this.page--;
+    this.router.navigate(['/profils/' + this.page]);
   }
 
 }

@@ -7,16 +7,16 @@ import { TokenService } from 'src/app/Services/token.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginGuard implements CanActivate {
+export class LogoutGuard implements CanActivate {
   constructor(public tokenService: TokenService, private router: Router) { }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
       const token = this.tokenService.getLocalStorageToken();
-      if (token){
+      if (!token){
         return true;
       }
-      this.router.navigate(['/login']);
+      this.router.navigate(['users']);
       return false;
   }
 

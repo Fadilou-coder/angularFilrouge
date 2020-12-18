@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators  } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { Profil } from 'src/app/Model/profil/profil';
 import { UserService } from 'src/app/Services/user.service';
 
 @Component({
@@ -20,10 +22,27 @@ export class AddProfilsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private userservice: UserService,
-    private url: ActivatedRoute
+    private url: ActivatedRoute,
+    private dialogRef: MatDialogRef<AddProfilsComponent>
   ) { }
 
   ngOnInit(): void {
+
+    this.id = UserService.idCourent;
+    if (this.id){
+      this.edit = true;
+      this.userservice.getOneProfil(this.id).subscribe(
+        (response: any) => {
+          this.profil = response[0];
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
+    }else{
+      this.profil = new Profil(0, '');
+    }
+
     this.formulaire = this.formBuilder.group({
       libelle: ['', [ Validators.required]]
     });
@@ -31,7 +50,11 @@ export class AddProfilsComponent implements OnInit {
     this.id = this.url.snapshot.params.id;
     if (this.id){
       this.edit = true;
-      this.profil = this.userservice.getOneProfil(this.id);
+      this.userservice.getOneProfil(this.id).subscribe(
+        (data: any) => {
+          this.profil = data[0];
+        }
+        );
     }
     console.log(this.id);
   }
@@ -43,6 +66,7 @@ export class AddProfilsComponent implements OnInit {
     this.userservice.addprofil(this.formulaire.value).subscribe(
       (response: any) => {
         console.log(response);
+        this.onClose();
         this.router.navigate(['/profils']);
       },
       error => {
@@ -51,12 +75,19 @@ export class AddProfilsComponent implements OnInit {
       }
     );
   }
+  onClose(){
+    this.formulaire.reset();
+    this.dialogRef?.close();
+    window.location.reload();
+  }
 
   updateProfil(){
-    this.id = this.url.snapshot.params.id;
+    this.id = UserService.idCourent;
     this.userservice.putProfil(this.id, this.formulaire.value).subscribe(
       (response: any) => {
         console.log(response);
+        this.onClose();
+        this.router.navigate(['/profils']);
       },
       (error: any) => {
         console.log(error);
