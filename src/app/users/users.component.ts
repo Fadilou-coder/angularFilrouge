@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import {UserService} from 'src/app/Services/user.service';
 import { AddUsersComponent } from 'src/app/add-users/add-users.component';
-import { UserbyprofilComponent } from 'src/app/userbyprofil/userbyprofil.component';
 
 @Component({
   selector: 'app-users',
@@ -14,9 +13,7 @@ import { UserbyprofilComponent } from 'src/app/userbyprofil/userbyprofil.compone
 })
 // tslint:disable-next-line: class-name
 export class usersComponent implements OnInit {
-  id: any;
-  users: any;
-  displayedColumns: string[] = ['nom', 'prenom', 'mail', 'profil', 'update', 'delete'];
+
 
   constructor(
     private userservice: UserService,
@@ -26,14 +23,30 @@ export class usersComponent implements OnInit {
     private url: ActivatedRoute,
     ) { }
 
+  page = this.url.snapshot.params['id'];
+  totalPage: any;
+  id: any;
+  users: any;
+  nbrPage: any;
+  displayedColumns: string[] = ['nom', 'prenom', 'mail', 'profil', 'update', 'delete'];
   ngOnInit(): void {
-    this.userservice.findAllUser(1).subscribe(
+    if (!this.page){
+      this.page = 1;
+    }
+    console.log(this.page);
+    this.userservice.findAllUser(this.page).subscribe(
       (response: any) => {
-        this.users = response;
+        console.log(response);
+        this.totalPage = response['hydra:totalItems'];
+        this.users = response['hydra:member'];
+        this.nbrPage = response['hydra:view']['hydra:last'];
+        this.nbrPage = this.nbrPage.split('=')[1];
+        console.log(this.nbrPage);
         }
       ,
       (error: any) => {console.log(error)}
     );
+
   }
 
   archiverUser(id: any){
@@ -65,6 +78,15 @@ export class usersComponent implements OnInit {
     this.dialog.open(AddUsersComponent);
   }
 
+  suivant(){
+    this.page++;
+    this.router.navigate(['/users/' + this.page]);
+  }
+
+  precedent(){
+    this.page--;
+    this.router.navigate(['/users/' + this.page]);
+  }
 
 
 }

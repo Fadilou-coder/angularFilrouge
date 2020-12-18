@@ -23,17 +23,20 @@ export class ListProfilsComponent implements OnInit {
   profils: any;
   displayedColumns: string[] = ['libelle', 'update', 'delete', 'details'];
   id: any;
+  nbrPage: any;
 
   ngOnInit(): void {
     this.id = UserService.idCourent;
-    console.log(this.page);
     if (!this.page){
       this.page = 1;
     }
     this.userservice.findAllProfil(this.page).subscribe(
       (response: any) => {
-        this.profils = response;
-        console.log(this.profils);
+        console.log(response);
+        this.profils = response['hydra:member'];
+        this.nbrPage = response['hydra:view']['hydra:last'];
+        this.nbrPage = this.nbrPage.split('=')[1];
+        console.log(this.nbrPage);
         }
       ,
       (error: any) => {

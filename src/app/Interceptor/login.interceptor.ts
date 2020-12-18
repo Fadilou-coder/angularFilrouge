@@ -15,7 +15,6 @@ export class LoginInterceptor implements HttpInterceptor{
       const cloneReq = req.clone(
         {
           headers: req.headers.set('Authorization', `Bearer ${token.token}`)
-          .set('Accept', 'application/json')
         }
       );
       return next.handle(cloneReq);

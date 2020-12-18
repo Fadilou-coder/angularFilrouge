@@ -17,7 +17,7 @@ export class UserService {
 
 
   findAllUser(page: any){
-    return this.http.get(this.baseUrl + '/admin/users');
+    return this.http.get(this.baseUrl + '/admin/users?page=' + page);
   }
 
   findAllProfil(page: any){

@@ -36,6 +36,7 @@ export class AddUsersComponent implements OnInit {
     private dialogRef: MatDialogRef<AddUsersComponent>
   ) { }
   ngOnInit(): void {
+
     this.id = UserService.idCourent;
     if (this.id){
       this.edit = true;
@@ -53,13 +54,23 @@ export class AddUsersComponent implements OnInit {
     }
 
 
-    this.formadd = this.formBuilder?.group({
-      email: ['', [ Validators.required, Validators.email]],
-      password: ['', [ Validators.required, Validators.minLength(6)]],
-      prenom: ['', [ Validators.required]],
-      nom: ['', [Validators.required]],
-      profils: ['', [ Validators.required]],
-    });
+    if (!this.edit){
+      this.formadd = this.formBuilder?.group({
+        email: ['', [ Validators.required, Validators.email]],
+        password: ['', [ Validators.required, Validators.minLength(6)]],
+        prenom: ['', [ Validators.required]],
+        nom: ['', [Validators.required]],
+        profils: ['', [ Validators.required]],
+        image: ['', [ Validators.required]],
+        confirm: ['', [ Validators.required, ]]
+      });
+    }else{
+      this.formadd = this.formBuilder?.group({
+        email: ['', [ Validators.required, Validators.email]],
+        prenom: ['', [ Validators.required]],
+        nom: ['', [Validators.required]]
+      });
+    }
 
   }
 
@@ -106,9 +117,11 @@ export class AddUsersComponent implements OnInit {
     formData.append('prenom', this.formadd.value.prenom);
     formData.append('nom', this.formadd.value.nom);
     formData.append('email', this.formadd.value.email);
-    formData.append('password', this.formadd.value.password);
-    formData.append('image', this.imageSelect);
-    formData.append('profils', this.formadd.value.profils);
+    if (!this.edit){
+      formData.append('password', this.formadd.value.password);
+      formData.append('image', this.imageSelect);
+      formData.append('profils', this.formadd.value.profils);
+     }
     this.userservice.putUser(this.id, formData).subscribe(
       (response: any) => {
         console.log(response);

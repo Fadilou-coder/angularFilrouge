@@ -44,11 +44,18 @@
             </td>
           </ng-container>
 
-         
+
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <form>
+          <button [disabled]="page == 1"  class="btn btn-primary" (click) = "precedent()">Previous</button>
+        </form>
+        <form>
+          <button class="page-link" (click) = "suivant()">Next</button>
+        </form>
+
       </div>
     </div>
 

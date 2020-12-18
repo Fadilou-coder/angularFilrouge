@@ -26,10 +26,10 @@
       <mat-error *ngIf="f?.email?.errors?.email">l'email n'est pas valide</mat-error>
     </mat-form-field>
     <br>
-    <mat-form-field appearance="fill" class = "w-100">
+    <mat-form-field appearance="fill" class = "w-100" *ngIf = "!edit">
       <mat-label>Password</mat-label>
       <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password" formControlName="password" type="passsord" id="password" name="password"
-      [ngClass]="{'is-invalid': f.password.errors }">
+      [ngClass]="{'is-invalid': f.password.errors }" >
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
@@ -45,11 +45,11 @@
       </mat-select>
     </mat-form-field>
     <br>
-    <div class="file-field" >
+    <div class="file-field" *ngIf = "!edit">
       <div class="d-flex justify-content-center">
         <div class="btn btn-mdb-color btn-rounded float-left">
           <span>Choose file</span>
-          <input type="file" [(ngModel)]="user.image" formControlName="image" id="image" name="image" (change)="onFilSelected($event)" [disabled] = "edit">
+          <input type="file" [(ngModel)]="user.image" formControlName="image" id="image" name="image" (change)="onFilSelected($event)">
         </div>
       </div>
     </div>
