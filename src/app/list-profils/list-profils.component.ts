@@ -19,11 +19,11 @@ export class ListProfilsComponent implements OnInit {
     private dialog: MatDialog,
     ) { }
   page = this.url.snapshot.params['id'];
-
   profils: any;
   displayedColumns: string[] = ['libelle', 'update', 'delete', 'details'];
   id: any;
-  nbrPage: any;
+  nbrPage: any = 1;
+
 
   ngOnInit(): void {
     this.id = UserService.idCourent;
@@ -34,8 +34,10 @@ export class ListProfilsComponent implements OnInit {
       (response: any) => {
         console.log(response);
         this.profils = response['hydra:member'];
-        this.nbrPage = response['hydra:view']['hydra:last'];
-        this.nbrPage = this.nbrPage.split('=')[1];
+        if(response['hydra:view']){
+          this.nbrPage = response['hydra:view']['hydra:last'];
+          this.nbrPage = this.nbrPage.split('=')[1];
+        }
         console.log(this.nbrPage);
         }
       ,
@@ -43,6 +45,9 @@ export class ListProfilsComponent implements OnInit {
         console.log(error);
       }
     );
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+    return false;
+    }
   }
 
   archiverProfil(id: any){

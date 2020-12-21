@@ -46,8 +46,8 @@ export class UserService {
     return this.http.get(this.baseUrl + '/admin/users/' + data);
   }
 
-  getUserByProfil(data: any){
-    return this.http.get(this.baseUrl + '/admin/profils/' + data + '/users');
+  getUserByProfil(data: any, page: any){
+    return this.http.get(this.baseUrl + '/admin/profils/' + data + '/users?page=' + page);
   }
 
   putProfil(id: any, body: any){

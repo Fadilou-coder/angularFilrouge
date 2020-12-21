@@ -39,17 +39,10 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <nav class="mt-2 float-right" *ngIf = "nbrPage">
-      <ul class="pagination">
-        <li class="page-item">
-          <button  class="page-link" (click) = "precedent()">Previous</button>
-        </li>
-
-        <li class="page-item">
-          <a class="page-link" (click) = "suivant()">Next</a>
-        </li>
-      </ul>
-    </nav>
+        <form class = "float-right">
+          <button [disabled]="page == 1"  class="btn btn-primary mr-4" (click) = "precedent()">Previous</button>
+          <button [disabled]="page == nbrPage" class="btn btn-primary" (click) = "suivant()">Next</button>
+        </form>
   </div>
 </div>
 

@@ -47,7 +47,8 @@ export class LoginComponent implements OnInit {
       this.token = (data as TokenClass);
       this.tokenService.setLocalStorageToken(this.token);
       const token = this.tokenService.getLocalStorageToken();
-      console.log(this.tokenService.getLocalStorageToken());
+      console.log(token)
+      window.location.reload();
       this.router.navigate(['/users']);
    }, (err: any) => console.log(err));
   }

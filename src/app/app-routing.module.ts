@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'addprofil', component: AddProfilsComponent, canActivate: [LoginGuard]},
   { path: 'adduser', component: AddUsersComponent, canActivate: [LoginGuard]},
   { path: 'usersbyprofil', component: UserbyprofilComponent, canActivate: [LoginGuard]},
+  { path: 'usersbyprofil/:id', component: UserbyprofilComponent, canActivate: [LoginGuard]},
   { path: 'profils/:id', component: ListProfilsComponent, canActivate: [LoginGuard]},
   { path: 'users/:id', component: usersComponent, canActivate: [LoginGuard]},
 ];

@@ -1,5 +1,6 @@
 import {MediaMatcher} from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import jwt_decode from 'jwt-decode';
 import { TokenService } from 'src/app/Services/token.service';
@@ -18,10 +19,11 @@ export class AppComponent implements OnDestroy, OnInit {
   panelOpenState = false;
   token = this.tokenService.getLocalStorageToken();
   decoded: any;
-constructor(public tokenService: TokenService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+constructor(public tokenService: TokenService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,  private router: Router ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+
   }
 ngOnInit(): void {
     if (this.token){
@@ -34,6 +36,7 @@ ngOnDestroy(): void {
   }
 logout(): void{
     this.tokenService.removeLocalStorage();
+    this.router.navigate(['/login']);
   }
 
 }

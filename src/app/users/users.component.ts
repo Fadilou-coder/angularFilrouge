@@ -24,7 +24,6 @@ export class usersComponent implements OnInit {
     ) { }
 
   page = this.url.snapshot.params['id'];
-  totalPage: any;
   id: any;
   users: any;
   nbrPage: any;
@@ -37,15 +36,19 @@ export class usersComponent implements OnInit {
     this.userservice.findAllUser(this.page).subscribe(
       (response: any) => {
         console.log(response);
-        this.totalPage = response['hydra:totalItems'];
         this.users = response['hydra:member'];
-        this.nbrPage = response['hydra:view']['hydra:last'];
-        this.nbrPage = this.nbrPage.split('=')[1];
+        if(response['hydra:view']){
+          this.nbrPage = response['hydra:view']['hydra:last'];
+          this.nbrPage = this.nbrPage.split('=')[1];
+        }
         console.log(this.nbrPage);
         }
       ,
       (error: any) => {console.log(error)}
     );
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+    return false;
+    }
 
   }
 
@@ -81,7 +84,7 @@ export class usersComponent implements OnInit {
   suivant(){
     this.page++;
     this.router.navigate(['/users/' + this.page]);
-  }
+   }
 
   precedent(){
     this.page--;
