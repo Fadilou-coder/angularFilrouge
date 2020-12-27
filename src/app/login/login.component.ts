@@ -14,7 +14,6 @@ import { TokenService } from 'src/app/Services/token.service';
 export class LoginComponent implements OnInit {
   email = '';
   password = '';
-  submitted = false;
   formLogin!: FormGroup;
   hide = true;
   public token: TokenClass | undefined;
@@ -38,10 +37,6 @@ export class LoginComponent implements OnInit {
   }
 
   DoLogin(): void{
-    this.submitted = true;
-    if (this.formLogin?.invalid) {
-      return;
-    }
     // traitement
     this.connexion.authenticate(this.email, this.password).subscribe((data: any) => {
       this.token = (data as TokenClass);
@@ -49,7 +44,7 @@ export class LoginComponent implements OnInit {
       const token = this.tokenService.getLocalStorageToken();
       console.log(token)
       window.location.reload();
-      this.router.navigate(['/users']);
+      this.router.navigate(['/apprenants']);
    }, (err: any) => console.log(err));
   }
 

@@ -14,20 +14,22 @@
     </mat-card-header>
 
     <form [formGroup]="formLogin" (ngSubmit)="DoLogin()">
+
       <mat-card-content>
         <mat-form-field class="example-full-width">
           <input matInput  [(ngModel)]="email" formControlName="email" type="text" id="email" name="email"
-          placeholder="Email" [ngClass]="{'is-invalid': submitted && f.email.errors }">
+          placeholder="Email" [ngClass]="{'is-invalid': f.email.errors }">
         </mat-form-field>
-        <div class="text-danger" *ngIf="submitted && f?.email?.errors">
+        <div class="text-danger" *ngIf="f?.email?.errors">
           <div *ngIf="f?.email?.errors?.required">email is required</div>
           <div *ngIf="f?.email?.errors?.email">email n'est pas valide</div>
         </div>
+
         <mat-form-field class="example-full-width">
           <input matInput [(ngModel)]="password" formControlName="password" type="password" id="password"
           name="password" placeholder="Password">
         </mat-form-field>
-        <div class="text-danger" *ngIf="submitted && f?.password?.errors">
+        <div class="text-danger" *ngIf="f?.password?.errors">
           <div *ngIf="f?.password?.errors?.required">password is required</div>
           <div *ngIf="f?.password?.errors?.minlength">password n'est pas valide</div>
         </div>

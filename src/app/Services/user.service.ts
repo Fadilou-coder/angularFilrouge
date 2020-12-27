@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +60,10 @@ export class UserService {
 
   getID(id: any){
     UserService.idCourent = id;
+  }
+
+  findAllApprenant(page: any){
+    return this.http.get(this.baseUrl + '/apprenants?page=' + page);
   }
 
 }

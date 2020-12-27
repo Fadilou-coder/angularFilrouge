@@ -18,7 +18,7 @@ export class AppComponent implements OnDestroy, OnInit {
   title = 'ProjetFilRouge';
   panelOpenState = false;
   token = this.tokenService.getLocalStorageToken();
-  decoded: any;
+  decoded: any = '';
 constructor(public tokenService: TokenService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,  private router: Router ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -29,7 +29,9 @@ ngOnInit(): void {
     if (this.token){
       this.decoded = jwt_decode(this.token.token);
       this.decoded = this.decoded.roles[0];
+      console.log(this.decoded);
     }
+
   }
 ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);

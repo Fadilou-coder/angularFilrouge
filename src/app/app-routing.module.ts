@@ -1,3 +1,4 @@
+import { ApprenantComponent } from './apprenant/apprenant.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -20,6 +21,8 @@ const routes: Routes = [
   { path: 'usersbyprofil/:id', component: UserbyprofilComponent, canActivate: [LoginGuard]},
   { path: 'profils/:id', component: ListProfilsComponent, canActivate: [LoginGuard]},
   { path: 'users/:id', component: usersComponent, canActivate: [LoginGuard]},
+  { path: 'apprenants/:id', component: ApprenantComponent, canActivate: [LoginGuard]},
+  { path: 'apprenants', component: ApprenantComponent, canActivate: [LoginGuard]},
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

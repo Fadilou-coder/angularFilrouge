@@ -17,6 +17,7 @@ import { ListProfilsComponent } from 'src/app/list-profils/list-profils.componen
 import { LoginComponent } from 'src/app/login/login.component';
 import { usersComponent } from 'src/app/users/users.component';
 import { UserbyprofilComponent } from './userbyprofil/userbyprofil.component';
+import { ApprenantComponent } from './apprenant/apprenant.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { UserbyprofilComponent } from './userbyprofil/userbyprofil.component';
     ListProfilsComponent,
     AddProfilsComponent,
     usersComponent,
-    UserbyprofilComponent
+    UserbyprofilComponent,
+    ApprenantComponent
   ],
   imports: [
 
@@ -37,6 +39,7 @@ import { UserbyprofilComponent } from './userbyprofil/userbyprofil.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+
     BrowserAnimationsModule,
     AngularMaterialModule,
     BrowserAnimationsModule,
